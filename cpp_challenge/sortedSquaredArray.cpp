@@ -8,8 +8,8 @@
 const int MIN_VECTOR_SIZE = 0;
 const int MAX_VECTOR_SIZE = 10000;
 const int MAX_ELEMENT_MAGNITUDE = 10000;
-const int NUMBER_OF_RANDOM_TESTS = 10;
-
+const int NUMBER_OF_RANDOM_TESTS = 1000;
+static int NumberOfFailures = 0;
 
 void printVector(std::vector<int> toPrint) {
 	if(MAX_VECTOR_SIZE <= 20) {
@@ -75,6 +75,7 @@ void testSortedSquaredArray(std::vector<int> key, std::vector<int> result) {
 	}
 	else {
 		printKeyAndResult(key, result);
+		NumberOfFailures++;
 		std::cout << "Test failed!" << std::endl << std::endl;
 	}
 }
@@ -127,5 +128,8 @@ int main() {
 		
 		testSortedSquaredArray(key, result);
 	}
+	
+	std::cout << "Total of failures: " << NumberOfFailures << std::endl;
+	
 	return 0;
 }

@@ -1,5 +1,5 @@
 #include <iostream>
-#include <ctime> 
+#include <chrono> 
 #include <cmath>
 
 int getMaximum(int arr[], int len)
@@ -28,7 +28,7 @@ void countSort(int arr[], int len, int digit)
 		arr[i] = result[i];
 }
  
-void radixsort(int arr[], int n)
+void radixSort(int arr[], int n)
 {
 	int digit, p;
 	p = getMaximum(arr, n);
@@ -41,18 +41,21 @@ int main()
 {
 	std::cout << "Hello Radix" << std::endl;
 	int len, i;
-	len = std::pow(10,6);
-
+	len = std::pow(10,5);
+	std::cout << "Length of array: " << len << std::endl;
 	int arr[len];
 	for(i = 0; i < len; i++)
 	{
 		arr[i] = rand() % 500;
 	}
         
-        std::time_t result = std::time(nullptr);
-	radixsort(arr, len);
-	std::time_t result2 = std::time(nullptr);
-	std::cout << "Radix sort took " << result2 - result << " milliseconds to sort one million integers" << std::endl;
+	auto begin = std::chrono::high_resolution_clock::now();    
+    	radixSort(arr, len);
+    	auto end = std::chrono::high_resolution_clock::now();    
+    	auto dur = end - begin;
+    	auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(dur).count();
+
+	std::cout << "Radix sort took " << ms << " milliseconds to sort one million integers" << std::endl;
  
 	
 }
